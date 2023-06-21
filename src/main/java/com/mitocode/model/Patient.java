@@ -34,7 +34,7 @@ public class Patient {
 	@Column(length=70, nullable=false)
 	private String lastName;
 	
-	@Column(length=8, nullable=false)
+	@Column(length=8, nullable=false, unique = true)
 	private String dni;
 	
 	@Column(length=150, nullable=false)
