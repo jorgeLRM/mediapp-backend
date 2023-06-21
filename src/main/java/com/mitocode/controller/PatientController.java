@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,14 +53,14 @@ public class PatientController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Patient> save(@RequestBody PatientDTO patientDto) {
+	public ResponseEntity<Patient> save(@Valid @RequestBody PatientDTO patientDto) {
 		Patient addedPatient = patientService.save(mapper.map(patientDto, Patient.class));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(addedPatient.getIdPatient()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Patient> update(@RequestBody PatientDTO patientDto) {
+	public ResponseEntity<Patient> update(@Valid @RequestBody PatientDTO patientDto) {
 		Patient updatedPatient = patientService.update(mapper.map(patientDto, Patient.class));
 		return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
 	}
