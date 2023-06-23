@@ -24,69 +24,69 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import com.mitocode.dto.PatientDTO;
+import com.mitocode.dto.MedicDTO;
 import com.mitocode.exception.ModelNotFoundException;
-import com.mitocode.model.Patient;
-import com.mitocode.service.PatientService;
+import com.mitocode.model.Medic;
+import com.mitocode.service.MedicService;
 
 @RestController
-@RequestMapping("/patients")
-public class PatientController {
+@RequestMapping("/medics")
+public class MedicController {
 	
 	@Autowired
-	private PatientService patientService;
+	private MedicService MedicService;
 	
 	@Autowired
 	private ModelMapper mapper;
 	
 	@GetMapping
-	public ResponseEntity<List<PatientDTO>> findAll() {
-		List<PatientDTO> patients = patientService.findAll().stream().map(p -> mapper.map(p, PatientDTO.class)).collect(Collectors.toList());
-		return new ResponseEntity<>(patients, HttpStatus.OK);
+	public ResponseEntity<List<MedicDTO>> findAll() {
+		List<MedicDTO> medics = MedicService.findAll().stream().map(p -> mapper.map(p, MedicDTO.class)).collect(Collectors.toList());
+		return new ResponseEntity<>(medics, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<PatientDTO> findById(@PathVariable("id") Integer id) {
-		Patient patient = patientService.findById(id);
+	public ResponseEntity<MedicDTO> findById(@PathVariable("id") Integer id) {
+		Medic medic = MedicService.findById(id);
 		
-		if (patient == null) {
+		if (medic == null) {
 			throw new ModelNotFoundException("ID NOT FOUND: " + id);
 		}
 		
-		return new ResponseEntity<>(mapper.map(patient, PatientDTO.class), HttpStatus.OK);
+		return new ResponseEntity<>(mapper.map(medic, MedicDTO.class), HttpStatus.OK);
 	}
 	
 	@GetMapping("/hateoas/{id}")
-	public EntityModel<PatientDTO> findByIdHateoas(@PathVariable("id") Integer id) {
-		Patient patient = patientService.findById(id);
+	public EntityModel<MedicDTO> findByIdHateoas(@PathVariable("id") Integer id) {
+		Medic medic = MedicService.findById(id);
 		
-		if (patient == null) {
+		if (medic == null) {
 			throw new ModelNotFoundException("ID NOT FOUND: " + id);
 		}
 		
-		EntityModel<PatientDTO> resource = EntityModel.of(mapper.map(patient, PatientDTO.class));
+		EntityModel<MedicDTO> resource = EntityModel.of(mapper.map(medic, MedicDTO.class));
 		WebMvcLinkBuilder link1 = linkTo(methodOn(this.getClass()).findById(id));
-		resource.add(link1.withRel("patient-info1"));
+		resource.add(link1.withRel("Medic-info1"));
 		
 		return resource;
 	}
 	
 	@PostMapping
-	public ResponseEntity<Patient> save(@Valid @RequestBody PatientDTO patientDto) {
-		Patient addedPatient = patientService.save(mapper.map(patientDto, Patient.class));
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(addedPatient.getIdPatient()).toUri();
+	public ResponseEntity<Medic> save(@Valid @RequestBody MedicDTO medicDto) {
+		Medic addedMedic = MedicService.save(mapper.map(medicDto, Medic.class));
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(addedMedic.getIdMedic()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Patient> update(@Valid @RequestBody PatientDTO patientDto) {
-		Patient updatedPatient = patientService.update(mapper.map(patientDto, Patient.class));
-		return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
+	public ResponseEntity<Medic> update(@Valid @RequestBody MedicDTO medicDto) {
+		Medic updatedMedic = MedicService.update(mapper.map(medicDto, Medic.class));
+		return new ResponseEntity<>(updatedMedic, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
-		patientService.delete(id);
+		MedicService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
