@@ -1,5 +1,8 @@
 package com.mitocode.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import com.mitocode.dto.PatientDTO;
 import com.mitocode.exception.ModelNotFoundException;
@@ -31,6 +32,7 @@ import com.mitocode.service.PatientService;
 
 @RestController
 @RequestMapping("/patients")
+//@CrossOrigin(origins = "*")
 public class PatientController {
 	
 	@Autowired
