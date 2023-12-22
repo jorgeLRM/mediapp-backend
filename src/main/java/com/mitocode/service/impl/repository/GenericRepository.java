@@ -1,4 +1,4 @@
-package com.mitocode.repository;
+package com.mitocode.service.impl.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

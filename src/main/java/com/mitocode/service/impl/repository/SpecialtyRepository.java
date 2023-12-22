@@ -1,4 +1,4 @@
-package com.mitocode.repository;
+package com.mitocode.service.impl.repository;
 
 import com.mitocode.model.Specialty;
 

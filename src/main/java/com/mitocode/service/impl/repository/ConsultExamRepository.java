@@ -1,4 +1,4 @@
-package com.mitocode.repository;
+package com.mitocode.service.impl.repository;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

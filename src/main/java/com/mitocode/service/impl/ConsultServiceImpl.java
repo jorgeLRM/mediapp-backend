@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.mitocode.model.Consult;
 import com.mitocode.model.Exam;
-import com.mitocode.repository.ConsultExamRepository;
-import com.mitocode.repository.ConsultRepository;
-import com.mitocode.repository.GenericRepository;
+import com.mitocode.service.impl.repository.ConsultExamRepository;
+import com.mitocode.service.impl.repository.ConsultRepository;
+import com.mitocode.service.impl.repository.GenericRepository;
 import com.mitocode.service.ConsultService;
 
 @Service

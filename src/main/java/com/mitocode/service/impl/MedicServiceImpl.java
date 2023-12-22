@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mitocode.model.Medic;
-import com.mitocode.repository.GenericRepository;
-import com.mitocode.repository.MedicRepository;
+import com.mitocode.service.impl.repository.GenericRepository;
+import com.mitocode.service.impl.repository.MedicRepository;
 import com.mitocode.service.MedicService;
 
 @Service

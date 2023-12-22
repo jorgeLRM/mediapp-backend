@@ -2,7 +2,7 @@ package com.mitocode.service.impl;
 
 import java.util.List;
 
-import com.mitocode.repository.GenericRepository;
+import com.mitocode.service.impl.repository.GenericRepository;
 import com.mitocode.service.GenericService;
 
 public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID>{
